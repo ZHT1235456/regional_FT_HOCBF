@@ -36,12 +36,9 @@ def run_exp1():
     T_max = config['simulation']['T_max']
     dt = config['simulation']['dt']
 
-    # 名义控制器：u_nom = -K * [q - q_ref, q_dot]
-    # 使用简单的 PD 控制器，目标是将系统推向安全集
+    # 名义控制器设为 0，纯粹验证 HOCBF 的恢复能力
     def u_nominal(x, t):
-        q_ref = 0.5  # 目标位置（安全集内部）
-        Kp, Kd = 2.0, 2.0
-        return -Kp * (x[0] - q_ref) - Kd * x[1]
+        return 0.0
 
     # 初始条件
     ics = config['exp1']['initial_conditions']
@@ -177,7 +174,7 @@ def plot_exp1_results(results, k, config):
         ax.legend()
         ax.grid(True, alpha=0.3, axis='y')
 
-    plt.suptitle(f'Experiment 1: r=2 Double Integrator (k={k})', fontsize=14)
+    plt.suptitle(f'Experiment 1: r=2 Double Integrator (k={k}, u_nom=0)', fontsize=14)
     plt.tight_layout()
 
     save_path = save_dir / "fig1_r2_recovery.png"

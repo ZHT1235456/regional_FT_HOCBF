@@ -33,9 +33,9 @@ def run_exp3_k_comparison():
     x0 = np.array(config['exp3']['initial_condition'])
     k_list = config['exp3']['k_list']
 
+    # 名义控制器设为 0
     def u_nominal(x, t):
-        q_ref = 0.5
-        return -2.0 * (x[0] - q_ref) - 2.0 * x[1]
+        return 0.0
 
     print("=" * 60)
     print("实验 3：不同 k 值对恢复时间的影响")
@@ -132,7 +132,7 @@ def plot_exp3_results(k_results, x0, config):
     ax.legend()
     ax.grid(True, alpha=0.3)
 
-    plt.suptitle('Experiment 3: Effect of HOCBF Gain k', fontsize=14)
+    plt.suptitle('Experiment 3: Effect of HOCBF Gain k (u_nom=0)', fontsize=14)
     plt.tight_layout()
 
     save_path = save_dir / "fig3_k_comparison.png"

@@ -35,11 +35,9 @@ def run_exp2():
     T_max = config['simulation']['T_max']
     dt = config['simulation']['dt']
 
-    # 名义控制器：PD + 加速度反馈
+    # 名义控制器设为 0，纯粹验证 HOCBF 的恢复能力
     def u_nominal(x, t):
-        q_ref = 0.5
-        Kp, Kd, Ka = 3.0, 3.0, 1.0
-        return -Kp * (x[0] - q_ref) - Kd * x[1] - Ka * x[2]
+        return 0.0
 
     ics = config['exp2']['initial_conditions']
     results = {}
@@ -127,7 +125,7 @@ def plot_exp2_results(results, k, config):
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3)
 
-    plt.suptitle(f'Experiment 2: r=3 Triple Integrator (k={k})', fontsize=14)
+    plt.suptitle(f'Experiment 2: r=3 Triple Integrator (k={k}, u_nom=0)', fontsize=14)
     plt.tight_layout()
 
     save_path = save_dir / "fig2_r3_recovery.png"
