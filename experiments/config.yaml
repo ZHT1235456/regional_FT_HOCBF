@@ -1,0 +1,47 @@
+# 实验参数配置
+
+# 系统参数
+system:
+  q_max: 1.0
+
+# HOCBF 参数
+hocbf:
+  k: 1.0
+  k_list: [0.5, 1.0, 2.0]
+
+# 仿真参数
+simulation:
+  T_max: 10.0
+  dt: 0.005
+
+# 实验 1: r=2 双积分器
+exp1:
+  name: "r2_recovery"
+  description: "双积分器有限时间恢复验证"
+  initial_conditions:
+    A1: [1.5, -1.0]
+    A2: [1.5, -0.5]
+    B1: [1.5, 0.0]
+    C1: [1.5, 1.0]
+
+# 实验 2: r=3 三阶积分器
+exp2:
+  name: "r3_recovery"
+  description: "三阶积分器有限时间恢复验证"
+  initial_conditions:
+    A1: [1.5, -1.0, 0.0]
+    A2: [1.5, -1.0, 1.0]
+    C1: [1.5, 1.0, 0.0]
+
+# 实验 3: k 值对比
+exp3:
+  name: "k_comparison"
+  description: "不同 k 值对恢复时间的影响"
+  initial_condition: [1.5, -1.0]
+  k_list: [0.3, 0.5, 1.0, 1.5, 2.0, 3.0]
+
+# 绘图参数
+plot:
+  figsize: [10, 6]
+  dpi: 150
+  save_dir: "results"
